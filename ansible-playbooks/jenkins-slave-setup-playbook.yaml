@@ -1,0 +1,28 @@
+---
+- hosts: jenkins-slave
+  become: true
+
+  tasks:
+  - name: Update Ubuntu Repo & Cache
+    ansible.builtin.apt:
+      update_cache: yes
+      force_apt_get: yes
+      cache_valid_time: 3600
+
+  - name: Install Java
+    ansible.builtin.apt:
+      name: openjdk-11-jre
+      state: present
+
+
+  - name: Download Maven Packages
+    ansible.builtin.get_url:
+      url: https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz
+      dest: /opt 
+      force_basic_auth: yes
+  
+  - name: Extract Maven Packages
+    ansible.builtin.unarchive:
+      src: /opt/apache-maven-3.9.4-bin.tar.gz
+      dest: /opt
+      remote_src: yes
