@@ -15,3 +15,9 @@ variable "instance_keypair" {
   type = string
   default = "devops-project"          
 }
+
+variable "ami-id" {
+  description = "AMI ID for EC-2 Instance"
+  type = string
+  default = "ami-0f5ee92e2d63afc18"
+}

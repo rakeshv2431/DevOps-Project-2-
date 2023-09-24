@@ -1,5 +1,5 @@
 resource "aws_instance" "test-server" {
-  ami = data.aws_ami.ami-id.id
+  ami = var.ami-id
   instance_type = var.instance_type
   key_name = var.instance_keypair
   subnet_id = aws_subnet.devops-public-subnet-1.id 
